@@ -14,6 +14,7 @@
 		FC7C41B625505235003DCD63 /* LearningCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FC7C41B425505235003DCD63 /* LearningCoreData.xcdatamodeld */; };
 		FC7C41B825505237003DCD63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC7C41B725505237003DCD63 /* Assets.xcassets */; };
 		FC7C41BB25505237003DCD63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC7C41B925505237003DCD63 /* LaunchScreen.storyboard */; };
+		FC7C41C4255052BA003DCD63 /* NameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7C41C3255052BA003DCD63 /* NameCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		FC7C41B725505237003DCD63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC7C41BA25505237003DCD63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC7C41BC25505237003DCD63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC7C41C3255052BA003DCD63 /* NameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				FC7C41AB25505235003DCD63 /* AppDelegate.swift */,
 				FC7C41AD25505235003DCD63 /* SceneDelegate.swift */,
 				FC7C41AF25505235003DCD63 /* ViewController.swift */,
+				FC7C41C3255052BA003DCD63 /* NameCell.swift */,
 				FC7C41B125505235003DCD63 /* Main.storyboard */,
 				FC7C41B725505237003DCD63 /* Assets.xcassets */,
 				FC7C41B925505237003DCD63 /* LaunchScreen.storyboard */,
@@ -143,6 +146,7 @@
 				FC7C41B625505235003DCD63 /* LearningCoreData.xcdatamodeld in Sources */,
 				FC7C41B025505235003DCD63 /* ViewController.swift in Sources */,
 				FC7C41AC25505235003DCD63 /* AppDelegate.swift in Sources */,
+				FC7C41C4255052BA003DCD63 /* NameCell.swift in Sources */,
 				FC7C41AE25505235003DCD63 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
