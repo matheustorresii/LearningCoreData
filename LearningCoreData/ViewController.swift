@@ -95,6 +95,38 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let updateAlert = UIAlertController(title: "Atualizar nome", message: "Digite o novo nome", preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "Atualizar", style: .default) { _ in
+            guard let textField = updateAlert.textFields!.first, let nameToUpdate = textField.text else { return }
+            self.update(name: nameToUpdate, in: indexPath)
+            self.tableView.reloadData()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel)
+        
+        updateAlert.addAction(confirmAction)
+        updateAlert.addAction(cancelAction)
+        updateAlert.addTextField()
+        
+        present(updateAlert, animated: true)
+    }
+    
+    func update(name: String, in indexPath: IndexPath) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let person = people[indexPath.row]
+        
+        person.setValue(name, forKey: "name")
+        
+        do {
+            try managedContext.save()
+            people[indexPath.row] = person
+        } catch let error as NSError {
+            fatalError("Couldn't save \(error) || \(error.userInfo)")
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
