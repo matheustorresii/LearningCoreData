@@ -22,19 +22,7 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Person")
-        
-        do {
-            people = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-            fatalError("Couldn't fetch \(error) || \(error.userInfo)")
-        }
-
-        tableView.reloadData()
+        fetchNames()
     }
 
     @IBAction func addNewName(_ sender: Any) {
@@ -57,7 +45,6 @@ class ViewController: UIViewController {
     
     func save(name: String) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        
         let managedContext = appDelegate.persistentContainer.viewContext
         
         let entity = NSEntityDescription.entity(forEntityName: "Person", in: managedContext)!
@@ -72,6 +59,21 @@ class ViewController: UIViewController {
         } catch let error as NSError {
             fatalError("Couldn't save \(error) || \(error.userInfo)")
         }
+    }
+    
+    func fetchNames() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Person")
+        
+        do {
+            people = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            fatalError("Couldn't fetch \(error) || \(error.userInfo)")
+        }
+
+        tableView.reloadData()
     }
 }
 
@@ -93,6 +95,24 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            let managedContext = appDelegate.persistentContainer.viewContext
+            
+            let person = people[indexPath.row]
+            managedContext.delete(person)
+            people.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            do {
+                try managedContext.save()
+            } catch let error as NSError {
+                fatalError("Couldn't save after delete \(error)")
+            }
+        }
     }
 }
 
